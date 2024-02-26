@@ -6,7 +6,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rickandmortys/repositories/charasters_repository/charactars_repository.dart';
 import 'package:rickandmortys/repositories/charasters_repository/models/character_model.dart';
 
-
 void main() {
   runApp(const RickAndMortys());
 }
@@ -19,7 +18,7 @@ class RickAndMortys extends StatelessWidget {
     return MaterialApp(
       title: 'RickAndMortysCharacters',
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.yellow,
+        scaffoldBackgroundColor: Color.fromARGB(255, 49, 13, 255),
         dividerColor: Color.fromARGB(255, 255, 0, 0),
         appBarTheme: const AppBarTheme(
           backgroundColor:Colors.yellow,
@@ -70,7 +69,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      backgroundColor: Colors.amber,
+      backgroundColor: Colors.white,
       appBar: AppBar(
 
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -81,13 +80,14 @@ class _MainPageScreenState extends State<MainPageScreen> {
       ? const SizedBox() 
       : ListView.separated(
         itemCount: _charactersList!.length,
-        separatorBuilder: (context, index) => const Divider( color: Colors.black,),
+        separatorBuilder: (context, index) => const Divider( color: Colors.black,height: 1,),
         itemBuilder: (context,i) { 
           final charName = _charactersList![i] ;
         
           return ListTile(
-          leading: SvgPicture.asset('assets/1707748504man22b.svg', height: 40,width: 40,),
-          trailing: SvgPicture.asset('assets/1704703189BigCat15b.svg',height: 40,width: 40,),
+          //leading: SvgPicture.asset('assets/1707748504man22b.svg', height: 40,width: 40,),
+          leading: Image.network(charName.image),
+         // trailing: SvgPicture.asset('assets/1704703189BigCat15b.svg',height: 40,width: 40,),
        //   onTap: () {
        //     Navigator.of(context).pushNamed('/detail', 
        //     arguments: characterName, 
@@ -95,7 +95,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
        //   },
           title: Text(charName.name, style: Theme.of(context).textTheme.bodyMedium,
           ),
-          subtitle: Text('ALIVE',
+          subtitle: Text(charName.status,
           style: Theme.of(context).textTheme.bodySmall, 
           ),
         ); 
